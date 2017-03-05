@@ -6,7 +6,6 @@ import codeGenerator from './05-generator'
 export default function compiler(input) {
   let tokens = tokenizer(input)
   let ast = parser(tokens)
-  debugger
   let newAst = transformer(ast)
   let output = codeGenerator(newAst)
 
