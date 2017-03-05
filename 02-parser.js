@@ -1,5 +1,5 @@
 import TOKENS from './types/token-types'
-import NODE from './types/node-types'
+import NODE from './types/ast-node-types'
 
 export default function parser(tokens=[]) {
   let current = 0

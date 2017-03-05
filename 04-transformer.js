@@ -1,5 +1,9 @@
-import NODE from './types/node-types'
+import NODE from './types/ast-node-types'
 import traverser from './03-traverser'
+
+import callExpression from './visitors/call-expression'
+import numberLiteral from './visitors/number-literal'
+import stringLiteral from './visitors/string-literal'
 
 export default function transformer (ast) {
   let newAst = {
@@ -10,45 +14,9 @@ export default function transformer (ast) {
   ast._context = newAst.body
 
   traverser(ast, {
-    [NODE.NUMBER_LITERAL]: {
-      enter(node, parent) {
-        parent._context.push({
-          type: NODE.NUMBER_LITERAL,
-          value: node.value
-        })
-      }
-    },
-    [NODE.STRING_LITERAL]: {
-      enter(node, parent) {
-        parent._context.push({
-          type: NODE.STRING_LITERAL,
-          value: node.value
-        })
-      }
-    },
-    [NODE.CALL_EXPRESSION]: {
-      enter(node, parent) {
-        let expression = {
-          type: NODE.CALL_EXPRESSION,
-          callee: {
-            type: NODE.IDENTIFIER,
-            name: node.name
-          },
-          arguments: []
-        }
-
-        node._context = expression.arguments
-
-        if (parent.type !== NODE.CALL_EXPRESSION) {
-          expression = {
-            type: NODE.EXPRESSION_STMT,
-            expression
-          }
-        }
-
-        parent._context.push(expression)
-      }
-    }
+    [NODE.NUMBER_LITERAL]: numberLiteral,
+    [NODE.STRING_LITERAL]: stringLiteral,
+    [NODE.CALL_EXPRESSION]: callExpression
   })
 
   return newAst

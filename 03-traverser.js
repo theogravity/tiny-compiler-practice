@@ -1,4 +1,4 @@
-import NODE from './types/node-types'
+import NODE from './types/ast-node-types'
 
 export default function traverse (ast, visitor) {
   function traverseArray(array, parent) {
