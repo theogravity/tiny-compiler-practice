@@ -1,0 +1,20 @@
+{
+  "name": "tiny-compiler-tgravity",
+  "version": "1.0.0",
+  "description": "Transcribed version of the tiny compiler by thejameskyle",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel-node --presets latest -- ./compile.js",
+    "debug": "babel-node --inspect --debug-brk --presets latest -- ./compile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Theo Gravity <theo@suteki.nu>",
+  "license": "MIT",
+  "dependencies": {
+    "command-line-args": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-latest": "^6.22.0"
+  }
+}
